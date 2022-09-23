@@ -6,8 +6,8 @@ int main()
 	List* list = new List();
 
 	list->add(10);
-	list->add(70);
 	list->add(20);
+	list->add(30);
 
 	list->displayList();
 

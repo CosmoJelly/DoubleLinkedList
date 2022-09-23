@@ -23,15 +23,17 @@ void List::add(int data)
 	Node* newNode = new Node(data);
 	if (head != nullptr)
 	{
-		newNode->setPrev(head);
 		newNode->setNext(head->getNext());
-		head->setNext(newNode);
 		(head->getNext())->setPrev(newNode);
+		newNode->setPrev(head);
+		head->setNext(newNode);
+		//head = newNode;
 		++size;
 	}
-	else if (head == nullptr) //&& head->getNext() == nullptr && head->getPrev() == nullptr)
+	else //&& head->getNext() == nullptr && head->getPrev() == nullptr)
 	{
 		head = newNode;
+		++size;
 	}
 }
 
