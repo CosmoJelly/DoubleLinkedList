@@ -21,15 +21,17 @@ List::~List()
 void List::add(int data)
 {
 	Node* newNode = new Node(data);
-	if (head != nullptr)
+	if (head == nullptr)
 	{
-		newNode->setNext(head);
-		head->setPrev(newNode);
 		head = newNode;
 		size++;
 	}
 	else
 	{
+		newNode->setNext(head);
+		newNode->setPrev(nullptr);
+		head->setPrev(newNode);
+		head->setPrev(nullptr);
 		head = newNode;
 		size++;
 	}
@@ -43,9 +45,10 @@ void List::addAfter(int data, int afterdata)
 		iterator = iterator->getNext();
 	}
 	Node* newNode = new Node(data);
-	newNode->setPrev(iterator);
 	newNode->setNext(iterator->getNext());
-	(iterator->getNext())->setPrev(newNode);
+	newNode->setPrev(iterator);
+	//add a check to see if next is null
+	//(iterator->getNext())->setPrev(newNode);
 	iterator->setNext(newNode);
 }
 
@@ -56,8 +59,8 @@ void List::remove(int data)
 	{
 		iterator = iterator->getNext();
 	}
-	iterator->getPrev()->setNext(iterator->getNext());
-	iterator->getNext()->setPrev(iterator->getPrev());
+	(iterator->getPrev())->setNext(iterator->getNext());
+	(iterator->getNext())->setPrev(iterator->getPrev());
 	delete iterator;
 }
 
