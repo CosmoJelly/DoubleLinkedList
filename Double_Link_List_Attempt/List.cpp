@@ -23,18 +23,42 @@ void List::add(int data)
 	Node* newNode = new Node(data);
 	if (head != nullptr)
 	{
-		newNode->setNext(head->getNext());
-		(head->getNext())->setPrev(newNode);
-		newNode->setPrev(head);
-		head->setNext(newNode);
-		//head = newNode;
-		++size;
+		newNode->setNext(head);
+		head->setPrev(newNode);
+		head = newNode;
+		size++;
 	}
-	else //&& head->getNext() == nullptr && head->getPrev() == nullptr)
+	else
 	{
 		head = newNode;
-		++size;
+		size++;
 	}
+}
+
+void List::addAfter(int data, int afterdata)
+{
+	Node* iterator = head;
+	while (iterator->getNext() != nullptr && iterator->getData() != afterdata)
+	{
+		iterator = iterator->getNext();
+	}
+	Node* newNode = new Node(data);
+	newNode->setPrev(iterator);
+	newNode->setNext(iterator->getNext());
+	(iterator->getNext())->setPrev(newNode);
+	iterator->setNext(newNode);
+}
+
+void List::remove(int data)
+{
+	Node* iterator = head;
+	while (iterator->getNext() != nullptr && iterator->getData() != data)
+	{
+		iterator = iterator->getNext();
+	}
+	iterator->getPrev()->setNext(iterator->getNext());
+	iterator->getNext()->setPrev(iterator->getPrev());
+	delete iterator;
 }
 
 void List::displayList()

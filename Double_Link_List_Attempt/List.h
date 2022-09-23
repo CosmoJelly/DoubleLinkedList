@@ -10,5 +10,7 @@ public:
 	List();
 	~List();
 	void add(int data);
+	void addAfter(int data, int afterdata);
+	void remove(int data);
 	void displayList();
 };
