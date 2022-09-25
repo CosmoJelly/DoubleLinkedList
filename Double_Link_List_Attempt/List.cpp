@@ -31,7 +31,7 @@ void List::add(int data)
 		newNode->setNext(head);
 		newNode->setPrev(nullptr);
 		head->setPrev(newNode);
-		head->setPrev(nullptr);
+		head->setNext(nullptr);
 		head = newNode;
 		size++;
 	}
@@ -55,12 +55,14 @@ void List::addAfter(int data, int afterdata)
 void List::remove(int data)
 {
 	Node* iterator = head;
-	while (iterator->getNext() != nullptr && iterator->getData() != data)
+	while (iterator->getNext() != nullptr && (iterator->getData() != data))
 	{
 		iterator = iterator->getNext();
 	}
-	(iterator->getPrev())->setNext(iterator->getNext());
-	(iterator->getNext())->setPrev(iterator->getPrev());
+	Node* temp = iterator->getPrev();
+	//temp->setNext(iterator->getNext());
+	//(iterator->getNext())->setPrev(temp);
+
 	delete iterator;
 }
 

@@ -9,7 +9,7 @@ int main()
 	list->add(1);
 	list->add(2);
 	list->add(3);
-	list->addAfter(70, 3);
+	list->addAfter(70, 1);
 	//list->remove(3);
 
 
